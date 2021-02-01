@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:structuremodel/app/core/routes/error_widget.dart';
 
-import 'app_route_interface.dart';
-import 'custom_app_route_model.dart';
+import 'interfaces/app_route_interface.dart';
+import 'models/custom_app_route_model.dart';
+import 'widgets/error_widget.dart';
 
 class NavigatorCustomAppRouter {
   static const String initialRoute = "/";

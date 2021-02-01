@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app_route_interface.dart';
+import '../interfaces/app_route_interface.dart';
 
 class CustomAppRouter {
   final String name;

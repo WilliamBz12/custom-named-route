@@ -1,4 +1,4 @@
-import 'custom_app_route_model.dart';
+import '../models/custom_app_route_model.dart';
 
 //features routes
 abstract class AppCustomRoutes {
