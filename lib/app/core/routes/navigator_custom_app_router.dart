@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:structuremodel/app/core/routes/error_widget.dart';
 
-import 'app_route_model.dart';
+import 'custom_app_route_model.dart';
 
-class CustomAppRouter {
+class NavigatorCustomAppRouter {
   static const String initialRoute = "/";
 
-  List<String> setBarOnPaths(List<String> paths) {
-    List<String> result = [];
-    for (var path in paths) {
-      result.add("/$path");
-    }
-    return result;
-  }
-
-  RouteFactory buildAppRoutes({@required List<AppRouter> routes}) {
+  RouteFactory buildAppRoutes({@required List<CustomAppRouter> routes}) {
     return (RouteSettings settings) {
       var paths = settings.name.split('/');
-      paths = setBarOnPaths(paths);
+      paths = _setBarOnPaths(paths);
 
       paths.removeAt(0); //remove first cause is empty
 
@@ -27,7 +19,7 @@ class CustomAppRouter {
       );
 
       var rootRoute = _directToSelectedAppRoute(
-        nextIndex: 1,
+        position: 1,
         paths: paths,
         currentAppRoute: currentRoute,
       );
@@ -44,31 +36,45 @@ class CustomAppRouter {
     };
   }
 
+  List<String> _setBarOnPaths(List<String> paths) {
+    List<String> result = [];
+    for (var path in paths) {
+      result.add("/$path");
+    }
+    return result;
+  }
+
   Route<dynamic> _errorRoute() {
     return MaterialPageRoute(
       builder: (_) => ErrorRouteWidget(),
     );
   }
 
-  AppRouter _directToSelectedAppRoute({
-    AppRouter currentAppRoute,
-    int nextIndex,
+  CustomAppRouter _directToSelectedAppRoute({
+    CustomAppRouter currentAppRoute,
+    int position,
     List<String> paths,
   }) {
-    if (nextIndex >= paths.length) {
+    //verify if is the last path of paths
+    if (position >= paths.length) {
       return currentAppRoute;
     }
 
+    /*
+    verify subroutes to handle the next step
+    if has -> get the next route
+    else -> we have a fail 
+    */
     if (currentAppRoute?.subRoutes != null) {
       final rootRoute = currentAppRoute.subRoutes.firstWhere(
-        (route) => route.name == paths[nextIndex],
+        (route) => route.name == paths[position],
         orElse: () => null,
       );
 
       return _directToSelectedAppRoute(
         currentAppRoute: rootRoute,
         paths: paths,
-        nextIndex: nextIndex + 1,
+        position: position + 1,
       );
     }
     return null;

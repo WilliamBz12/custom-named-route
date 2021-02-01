@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AppRouter {
+class CustomAppRouter {
   final String name;
   final Widget Function(BuildContext context, CustomArguments args) child;
-  final List<AppRouter> subRoutes;
+  final List<CustomAppRouter> subRoutes;
 
-  AppRouter({
+  CustomAppRouter({
     @required this.name,
     @required this.child,
     this.subRoutes,

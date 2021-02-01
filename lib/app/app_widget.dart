@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'app_routes.dart';
-import 'core/routes/custom_app_router.dart';
+import 'core/routes/navigator_custom_app_router.dart';
 
 class AppWidget extends StatelessWidget {
+  final navigatorAppRouter = NavigatorCustomAppRouter();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,8 +13,8 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: CustomAppRouter.initialRoute,
-      onGenerateRoute: CustomAppRouter().buildAppRoutes(
+      initialRoute: NavigatorCustomAppRouter.initialRoute,
+      onGenerateRoute: navigatorAppRouter.buildAppRoutes(
         routes: AppRoutes().routes,
       ),
     );
