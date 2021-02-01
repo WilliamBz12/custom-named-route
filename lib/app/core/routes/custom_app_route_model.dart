@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'app_route_interface.dart';
+
 class CustomAppRouter {
   final String name;
   final Widget Function(BuildContext context, CustomArguments args) child;
-  final List<CustomAppRouter> subRoutes;
+  final FeatureCustomRouters featureRoutes;
 
   CustomAppRouter({
     @required this.name,
     @required this.child,
-    this.subRoutes,
+    this.featureRoutes,
   });
 }
 

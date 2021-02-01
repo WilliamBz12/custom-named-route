@@ -18,14 +18,14 @@ class AppRoutes extends AppCustomRoutes {
         CustomAppRouter(
           name: "/home",
           child: (_, args) => HomePage(),
-          subRoutes: HomeRoutes().subRoutes,
+          featureRoutes: HomeRoutes(),
         ),
         CustomAppRouter(
           name: "/second",
           child: (_, args) => SecondPage(
             title: args.data,
           ),
-          subRoutes: SecondRoutes().subRoutes,
+          featureRoutes: SecondRoutes(),
         ),
       ];
 }

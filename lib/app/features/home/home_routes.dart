@@ -4,7 +4,7 @@ import 'package:structuremodel/app/features/home/pages/details_page.dart';
 
 class HomeRoutes implements FeatureCustomRouters {
   @override
-  List<CustomAppRouter> get subRoutes => [
+  List<CustomAppRouter> get routes => [
         CustomAppRouter(
           name: "/details",
           child: (_, args) => DetailsPage(args.data),

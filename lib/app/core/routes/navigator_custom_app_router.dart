@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:structuremodel/app/core/routes/error_widget.dart';
 
+import 'app_route_interface.dart';
 import 'custom_app_route_model.dart';
 
 class NavigatorCustomAppRouter {
   static const String initialRoute = "/";
 
-  RouteFactory buildAppRoutes({@required List<CustomAppRouter> routes}) {
+  RouteFactory buildAppRoutes({@required AppCustomRoutes appRouters}) {
     return (RouteSettings settings) {
       var paths = settings.name.split('/');
       paths = _setBarOnPaths(paths);
 
       paths.removeAt(0); //remove first cause is empty
 
-      final currentRoute = routes.firstWhere(
+      final firstRoute = appRouters.routes.firstWhere(
         (route) => route.name == paths[0],
         orElse: () => null,
       );
@@ -21,7 +22,7 @@ class NavigatorCustomAppRouter {
       var rootRoute = _directToSelectedAppRoute(
         position: 1,
         paths: paths,
-        currentAppRoute: currentRoute,
+        currentAppRoute: firstRoute,
       );
 
       if (rootRoute == null) return _errorRoute();
@@ -65,8 +66,8 @@ class NavigatorCustomAppRouter {
     if has -> get the next route
     else -> we have a fail 
     */
-    if (currentAppRoute?.subRoutes != null) {
-      final rootRoute = currentAppRoute.subRoutes.firstWhere(
+    if (currentAppRoute?.featureRoutes != null) {
+      final rootRoute = currentAppRoute.featureRoutes.routes.firstWhere(
         (route) => route.name == paths[position],
         orElse: () => null,
       );
