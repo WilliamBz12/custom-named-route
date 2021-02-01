@@ -1,14 +1,12 @@
-import 'package:structuremodel/app/core/routes/models/custom_app_route_model.dart';
-import 'package:structuremodel/app/core/routes/navigator_custom_app_router.dart';
 import 'package:structuremodel/app/features/home/home_router.dart';
 import 'package:structuremodel/app/features/second/second_page.dart';
 import 'package:structuremodel/app/features/second/second_router.dart';
 import 'package:structuremodel/app/features/splash/splash_page.dart';
+import 'package:custom_app_router/custom_app_router.dart';
 
-import 'core/routes/interfaces/app_route_interface.dart';
 import 'features/home/home_page.dart';
 
-class AppRoutes extends AppCustomRoutes {
+class AppRoutes extends AppCustomRouter {
   @override
   List<CustomAppRouter> get routes => [
         CustomAppRouter(

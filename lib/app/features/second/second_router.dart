@@ -1,7 +1,6 @@
-import 'package:structuremodel/app/core/routes/interfaces/app_route_interface.dart';
-import 'package:structuremodel/app/core/routes/models/custom_app_route_model.dart';
+import 'package:custom_app_router/custom_app_router.dart';
 
-class SecondRouter extends FeatureCustomRouters {
+class SecondRouter extends FeatureCustomRouter {
   @override
   List<CustomAppRouter> get routes => [];
 }

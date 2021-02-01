@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'interfaces/app_route_interface.dart';
-import 'models/custom_app_route_model.dart';
-import 'widgets/error_widget.dart';
+import '../interfaces/app_route_interface.dart';
+import '../models/custom_app_route_model.dart';
+import '../widgets/error_widget.dart';
 
 class NavigatorCustomAppRouter {
   static const String initialRoute = "/";
 
-  RouteFactory buildAppRoutes({@required AppCustomRoutes appRouters}) {
+  RouteFactory buildAppRoutes({@required AppCustomRouter appRouters}) {
     return (RouteSettings settings) {
       var paths = settings.name.split('/');
       paths = _setBarOnPaths(paths);

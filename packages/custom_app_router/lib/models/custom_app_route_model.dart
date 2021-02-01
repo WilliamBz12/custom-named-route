@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../interfaces/app_route_interface.dart';
+import '../interfaces/feature_custom_interface.dart';
 
 class CustomAppRouter {
   final String name;
   final Widget Function(BuildContext context, CustomArguments args) child;
-  final FeatureCustomRouters featureRouter;
+  final FeatureCustomRouter featureRouter;
 
   CustomAppRouter({
     @required this.name,

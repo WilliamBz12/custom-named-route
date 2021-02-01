@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_routes.dart';
-import 'core/routes/navigator_custom_app_router.dart';
+import 'package:custom_app_router/custom_app_router.dart';
 
 class AppWidget extends StatelessWidget {
   @override
