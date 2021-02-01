@@ -24,16 +24,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
             RaisedButton(
               child: Text("Go to Second"),
               onPressed: () {
                 Navigator.pushNamed(
                   context,
                   "/second",
-                  arguments: "SEGUNDO",
+                  arguments: "Second page",
                 );
               },
             ),
@@ -43,7 +40,9 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _onTap,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.details,
+        ),
       ),
     );
   }

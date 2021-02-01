@@ -1,8 +1,8 @@
 import 'package:structuremodel/app/core/routes/custom_app_route_model.dart';
 import 'package:structuremodel/app/core/routes/navigator_custom_app_router.dart';
-import 'package:structuremodel/app/features/home/home_routes.dart';
+import 'package:structuremodel/app/features/home/home_router.dart';
 import 'package:structuremodel/app/features/second/second_page.dart';
-import 'package:structuremodel/app/features/second/second_routes.dart';
+import 'package:structuremodel/app/features/second/second_router.dart';
 import 'package:structuremodel/app/features/splash/splash_page.dart';
 
 import 'core/routes/app_route_interface.dart';
@@ -18,14 +18,14 @@ class AppRoutes extends AppCustomRoutes {
         CustomAppRouter(
           name: "/home",
           child: (_, args) => HomePage(),
-          featureRoutes: HomeRoutes(),
+          featureRouter: HomeRouter(),
         ),
         CustomAppRouter(
           name: "/second",
           child: (_, args) => SecondPage(
             title: args.data,
           ),
-          featureRoutes: SecondRoutes(),
+          featureRouter: SecondRouter(),
         ),
       ];
 }

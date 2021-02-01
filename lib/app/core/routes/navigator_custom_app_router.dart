@@ -25,7 +25,7 @@ class NavigatorCustomAppRouter {
         currentAppRoute: firstRoute,
       );
 
-      if (rootRoute == null) return _errorRoute();
+      if (rootRoute == null) return _errorRoute(settings.name);
 
       return MaterialPageRoute(
         builder: (context) => rootRoute.child(
@@ -45,9 +45,9 @@ class NavigatorCustomAppRouter {
     return result;
   }
 
-  Route<dynamic> _errorRoute() {
+  Route<dynamic> _errorRoute(String route) {
     return MaterialPageRoute(
-      builder: (_) => ErrorRouteWidget(),
+      builder: (_) => ErrorRouteWidget(route),
     );
   }
 
@@ -66,8 +66,8 @@ class NavigatorCustomAppRouter {
     if has -> get the next route
     else -> we have a fail 
     */
-    if (currentAppRoute?.featureRoutes != null) {
-      final rootRoute = currentAppRoute.featureRoutes.routes.firstWhere(
+    if (currentAppRoute?.featureRouter != null) {
+      final rootRoute = currentAppRoute.featureRouter.routes.firstWhere(
         (route) => route.name == paths[position],
         orElse: () => null,
       );
