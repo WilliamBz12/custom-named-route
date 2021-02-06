@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:structuremodel/app/features/home/cubits/images/images_cubit.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +19,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final imagesCubit = Provider.of<ImagesCubit>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -24,14 +29,36 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Expanded(
+              child: BlocBuilder<ImagesCubit, ImagesState>(
+                cubit: imagesCubit,
+                builder: (_, state) {
+                  return state.maybeWhen(
+                    loadLoading: () => CircularProgressIndicator(),
+                    loadFailure: (message) => Text(message),
+                    loadSuccess: (data) {
+                      return Row(
+                        children: List.generate(
+                          data.length,
+                          (index) => Text(data[index]),
+                        ),
+                      );
+                    },
+                    orElse: () => Container(),
+                  );
+                },
+              ),
+            ),
             RaisedButton(
               child: Text("Go to Second"),
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  "/second",
-                  arguments: "Second page",
-                );
+                imagesCubit.load();
+
+                // Navigator.pushNamed(
+                //   context,
+                //   "/second",
+                //   arguments: "Second page",
+                // );
               },
             ),
           ],
