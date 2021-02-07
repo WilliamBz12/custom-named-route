@@ -1,5 +1,6 @@
-import 'package:custom_app_router/interfaces/custom_feature_interface.dart';
 import 'package:flutter/material.dart';
+import '../interfaces/custom_feature_interface.dart';
+import 'custom_arguments_model.dart';
 
 class CustomRouter {
   final String name;
@@ -11,9 +12,4 @@ class CustomRouter {
     @required this.child,
     this.featureRouter,
   });
-}
-
-class CustomArguments {
-  final dynamic data;
-  CustomArguments(this.data);
 }

@@ -1,0 +1,12 @@
+include: package:effective_dart/analysis_options.1.1.0.yaml
+
+analyzer:
+  errors:
+    # treat missing required parameters as a warning (not a hint)
+    missing_required_param: warning
+
+
+linter:
+  rules:
+    public_member_api_docs: false
+    constant_identifier_names: false

@@ -1,7 +1,9 @@
-import 'package:custom_app_router/custom_app_router.dart';
 import 'package:flutter/material.dart';
 
 import '../interfaces/app_route_interface.dart';
+import '../interfaces/custom_feature_interface.dart';
+import '../models/custom_arguments_model.dart';
+import '../models/custom_route_model.dart';
 import '../widgets/error_widget.dart';
 
 class CustomNavigator {
@@ -52,7 +54,7 @@ class CustomNavigator {
   }
 
   List<String> _setBarOnPaths(List<String> paths) {
-    List<String> result = [];
+    var result = <String>[];
     for (var path in paths) {
       result.add("/$path");
     }
