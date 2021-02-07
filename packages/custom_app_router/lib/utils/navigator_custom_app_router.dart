@@ -1,40 +1,53 @@
+import 'package:custom_app_router/custom_app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../interfaces/app_route_interface.dart';
-import '../models/custom_app_route_model.dart';
 import '../widgets/error_widget.dart';
 
 class NavigatorCustomAppRouter {
   static const String initialRoute = "/";
 
-  RouteFactory buildAppRoutes({@required AppCustomRouter appRouters}) {
+  RouteFactory buildAppRoutes({@required CustomAppRouter appRouters}) {
     return (RouteSettings settings) {
       var paths = settings.name.split('/');
       paths = _setBarOnPaths(paths);
 
       paths.removeAt(0); //remove first cause is empty
 
-      final firstRoute = appRouters.routes.firstWhere(
-        (route) => route.name == paths[0],
+      final selectedFeature = appRouters.features.firstWhere(
+        (feature) => feature.name == paths[0],
         orElse: () => null,
       );
 
-      var rootRoute = _directToSelectedAppRoute(
-        position: 1,
+      var router = _directToRouter(
+        feature: selectedFeature?.feature,
         paths: paths,
-        currentAppRoute: firstRoute,
       );
 
-      if (rootRoute == null) return _errorRoute(settings.name);
+      if (router == null) return _errorRoute(settings.name);
 
       return MaterialPageRoute(
-        builder: (context) => rootRoute.child(
+        builder: (context) => router?.child(
           context,
           CustomArguments(settings.arguments),
         ),
         settings: settings,
       );
     };
+  }
+
+  CustomRouter _directToRouter({CustomFeature feature, List<String> paths}) {
+    if (paths.length <= 1) {
+      return feature.routes
+          .firstWhere((element) => element.name == initialRoute);
+    }
+
+    return _directToSelectedAppRoute(
+      paths: paths,
+      position: 1,
+      routers: feature.routes,
+    );
   }
 
   List<String> _setBarOnPaths(List<String> paths) {
@@ -51,29 +64,23 @@ class NavigatorCustomAppRouter {
     );
   }
 
-  CustomAppRouter _directToSelectedAppRoute({
-    CustomAppRouter currentAppRoute,
+  CustomRouter _directToSelectedAppRoute({
+    List<CustomRouter> routers,
     int position,
     List<String> paths,
   }) {
-    //verify if is the last path of paths
-    if (position >= paths.length) {
-      return currentAppRoute;
-    }
-
-    /*
-    verify subroutes to handle the next step
-    if has -> get the next route
-    else -> we have a fail 
-    */
-    if (currentAppRoute?.featureRouter != null) {
-      final rootRoute = currentAppRoute.featureRouter.routes.firstWhere(
+    if (routers != null) {
+      final rootRoute = routers.firstWhere(
         (route) => route.name == paths[position],
         orElse: () => null,
       );
 
+      if (paths.length >= position) {
+        return rootRoute;
+      }
+
       return _directToSelectedAppRoute(
-        currentAppRoute: rootRoute,
+        routers: rootRoute.featureRouter.routes,
         paths: paths,
         position: position + 1,
       );
