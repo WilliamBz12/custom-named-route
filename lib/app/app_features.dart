@@ -8,12 +8,16 @@ class AppFeatures extends CustomAppRouter {
   @override
   List<CustomFeatureRouter> get features => [
         CustomFeatureRouter(
-          name: NavigatorCustomAppRouter.initialRoute,
+          name: CustomNavigator.initialRoute,
           feature: SplashFeature(),
         ),
         CustomFeatureRouter(
+          name: "/home",
+          feature: HomeFeature(),
+        ),
+        CustomFeatureRouter(
           name: "/second",
-          feature: SecondRouter(),
+          feature: SecondFeature(),
         ),
       ];
 }

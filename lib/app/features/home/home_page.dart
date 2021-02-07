@@ -34,7 +34,9 @@ class _HomePageState extends State<HomePage> {
                 cubit: imagesCubit,
                 builder: (_, state) {
                   return state.maybeWhen(
-                    loadLoading: () => CircularProgressIndicator(),
+                    loadLoading: () => Center(
+                      child: CircularProgressIndicator(),
+                    ),
                     loadFailure: (message) => Text(message),
                     loadSuccess: (data) {
                       return Row(

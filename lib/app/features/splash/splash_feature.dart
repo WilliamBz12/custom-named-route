@@ -9,7 +9,7 @@ class SplashFeature extends CustomFeature {
   @override
   List<CustomRouter> get routes => [
         CustomRouter(
-          name: NavigatorCustomAppRouter.initialRoute,
+          name: CustomNavigator.initialRoute,
           child: (_, args) => SplashPage(),
         ),
       ];

@@ -5,17 +5,17 @@ import 'package:provider/provider.dart';
 import '../interfaces/app_route_interface.dart';
 import '../widgets/error_widget.dart';
 
-class NavigatorCustomAppRouter {
+class CustomNavigator {
   static const String initialRoute = "/";
 
-  RouteFactory buildAppRoutes({@required CustomAppRouter appRouters}) {
+  RouteFactory buildRouters({@required CustomAppRouter appFeatures}) {
     return (RouteSettings settings) {
       var paths = settings.name.split('/');
       paths = _setBarOnPaths(paths);
 
       paths.removeAt(0); //remove first cause is empty
 
-      final selectedFeature = appRouters.features.firstWhere(
+      final selectedFeature = appFeatures.features.firstWhere(
         (feature) => feature.name == paths[0],
         orElse: () => null,
       );
@@ -28,10 +28,22 @@ class NavigatorCustomAppRouter {
       if (router == null) return _errorRoute(settings.name);
 
       return MaterialPageRoute(
-        builder: (context) => router?.child(
-          context,
-          CustomArguments(settings.arguments),
-        ),
+        builder: (context) {
+          if (selectedFeature.feature.providers != null ||
+              selectedFeature.feature.providers.isEmpty)
+            return router?.child(
+              context,
+              CustomArguments(settings.arguments),
+            );
+
+          return MultiProvider(
+            providers: selectedFeature?.feature?.providers,
+            child: router?.child(
+              context,
+              CustomArguments(settings.arguments),
+            ),
+          );
+        },
         settings: settings,
       );
     };
