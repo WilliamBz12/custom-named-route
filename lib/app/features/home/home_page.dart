@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final imagesCubit = Provider.of<ImagesCubit>(context);
+    final imagesCubit = Provider.of<ImagesCubit>(context, listen: true);
 
     return Scaffold(
       appBar: AppBar(

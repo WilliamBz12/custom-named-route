@@ -1,6 +1,5 @@
 import 'package:custom_app_router/custom_app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../interfaces/app_route_interface.dart';
 import '../widgets/error_widget.dart';
@@ -13,7 +12,7 @@ class CustomNavigator {
       var paths = settings.name.split('/');
       paths = _setBarOnPaths(paths);
 
-      paths.removeAt(0); //remove first cause is empty
+      paths.removeAt(0); //remove first 'cause it's empty
 
       final selectedFeature = appFeatures.features.firstWhere(
         (feature) => feature.name == paths[0],
@@ -28,20 +27,10 @@ class CustomNavigator {
       if (router == null) return _errorRoute(settings.name);
 
       return MaterialPageRoute(
-        builder: (context) {
-          if (selectedFeature.feature.providers != null ||
-              selectedFeature.feature.providers.isEmpty)
-            return router?.child(
-              context,
-              CustomArguments(settings.arguments),
-            );
-
-          return MultiProvider(
-            providers: selectedFeature?.feature?.providers,
-            child: router?.child(
-              context,
-              CustomArguments(settings.arguments),
-            ),
+        builder: (BuildContext context) {
+          return router?.child(
+            context,
+            CustomArguments(settings?.arguments),
           );
         },
         settings: settings,

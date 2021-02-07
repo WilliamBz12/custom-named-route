@@ -1,4 +1,5 @@
 import 'package:custom_app_router/custom_app_router.dart';
+import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,10 @@ class HomeFeature extends CustomFeature {
   List<CustomRouter> get routes => [
         CustomRouter(
           name: CustomNavigator.initialRoute,
-          child: (_, args) => HomePage(),
+          child: (_, args) => MultiProvider(
+            providers: providers,
+            builder: (context, child) => HomePage(),
+          ),
         ),
         CustomRouter(
           name: "/details",
