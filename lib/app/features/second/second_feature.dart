@@ -10,9 +10,7 @@ class SecondFeature extends CustomFeature {
   List<CustomRouter> get routes => [
         CustomRouter(
           name: CustomNavigator.initialRoute,
-          child: (_, args) => SecondPage(
-            title: args.data,
-          ),
+          child: (_, args) => SecondPage(title: args.data),
         ),
       ];
 }
