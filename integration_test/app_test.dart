@@ -31,6 +31,12 @@ void main() {
     "find text 2",
     (WidgetTester tester) async {
       expect(find.text('image2'), findsNothing);
+
+      await tester.tap(find.byType(FloatingActionButton));
+      // Wait for all the animations to finish
+      await tester.pumpAndSettle();
+
+      expect(find.byType(HomePage), findsOneWidget);
     },
   );
 }

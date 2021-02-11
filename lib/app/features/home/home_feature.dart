@@ -14,25 +14,22 @@ class HomeFeature extends CustomFeature {
         CustomRouter(
           name: CustomNavigator.initialRoute,
           child: (_, args) => MultiProvider(
-            providers: providers,
-            builder: (context, child) => HomePage(),
+            providers: [
+              ChangeNotifierProvider<ImagesRepository>(
+                create: (context) => ImagesRepository(),
+              ),
+              BlocProvider<ImagesCubit>(
+                create: (context) => ImagesCubit(
+                  Provider.of(context, listen: false),
+                ),
+              ),
+            ],
+            builder: (_, child) => HomePage(),
           ),
         ),
         CustomRouter(
           name: "/details",
           child: (_, args) => DetailsPage(args.data),
-        ),
-      ];
-
-  @override
-  List<SingleChildWidget> get providers => [
-        ChangeNotifierProvider<ImagesRepository>(
-          create: (context) => ImagesRepository(),
-        ),
-        BlocProvider<ImagesCubit>(
-          create: (context) => ImagesCubit(
-            Provider.of(context, listen: false),
-          ),
         ),
       ];
 }

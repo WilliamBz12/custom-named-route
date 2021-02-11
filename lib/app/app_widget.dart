@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: CustomNavigator.initialRoute,
-      onGenerateRoute: CustomNavigator().buildRouters(
+      onGenerateRoute: CustomNavigator().generateRoutes(
         appFeatures: AppFeatures(),
       ),
     );

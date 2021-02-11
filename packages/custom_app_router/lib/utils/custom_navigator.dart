@@ -9,7 +9,7 @@ import '../widgets/error_widget.dart';
 class CustomNavigator {
   static const String initialRoute = "/";
 
-  RouteFactory buildRouters({@required CustomAppRouter appFeatures}) {
+  RouteFactory generateRoutes({@required CustomAppRouter appFeatures}) {
     return (RouteSettings settings) {
       var paths = settings.name.split('/');
       paths = _setBarOnPaths(paths);
