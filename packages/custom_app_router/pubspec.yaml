@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  json_annotation: ^3.0.1
+  json_serializable: ^3.4.1
 
 
 dev_dependencies:
