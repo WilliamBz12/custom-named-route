@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:structuremodel/app/features/second/ui/widgets/text_widget.dart';
 
 class SecondPage extends StatefulWidget {
   final String title;
@@ -22,19 +23,8 @@ class _SecondPageState extends State<SecondPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body: TextWidget(
+        counter: _counter,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
