@@ -1,10 +1,10 @@
 import 'package:integration_test/integration_test.dart';
-import 'scenarios/home_scenario.dart' as homeScenario;
-import 'scenarios/details_scenario.dart' as detailsScenario;
+import 'scenarios/home_scenario.dart' as home;
+import 'scenarios/details_scenario.dart' as details;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   //scenarios
-  homeScenario.main();
-  detailsScenario.main();
+  home.main();
+  details.main();
 }

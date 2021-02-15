@@ -9,8 +9,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets(
-    "Not inputting a text and wanting to go to the display page shows "
-    "an error and prevents from going to the display page.",
+    "load details page with arguments",
     (WidgetTester tester) async {
       await tester.pumpWidget(AppWidget());
       // Testing starts at the root widget in the widget tree
