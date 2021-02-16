@@ -46,8 +46,10 @@ class CustomNavigator {
 
   CustomRouter _directToRouter({CustomFeature feature, List<String> paths}) {
     if (paths.length <= 1) {
-      return feature.routes
-          .firstWhere((element) => element.name == initialRoute);
+      return feature?.routes?.firstWhere(
+        (element) => element.name == initialRoute,
+        orElse: () => null,
+      );
     }
 
     return _directToSelectedAppRoute(

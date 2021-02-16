@@ -24,17 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        RepositoryProvider<ImagesRepository>(
-          create: (context) => ImagesRepository(client: context.read<Dio>()),
-        ),
-        BlocProvider<ImagesCubit>(
-          create: (context) => ImagesCubit(context.read<ImagesRepository>()),
-        ),
-      ],
-      builder: (_, __) => _buildContent(),
-    );
+    return _buildContent();
   }
 
   Widget _buildContent() {
