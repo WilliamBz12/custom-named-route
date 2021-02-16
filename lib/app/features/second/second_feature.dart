@@ -1,5 +1,5 @@
 import 'package:custom_app_router/custom_app_router.dart';
-import 'ui/pages/second_page.dart';
+import 'pages/second_page.dart';
 
 class SecondFeature extends CustomFeature {
   @override

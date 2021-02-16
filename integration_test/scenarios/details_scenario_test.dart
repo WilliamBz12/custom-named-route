@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:structuremodel/app/app_widget.dart';
-import 'package:structuremodel/app/features/home/ui/pages/home_page.dart';
-import 'package:structuremodel/app/features/home/ui/pages/details_page.dart';
+import 'package:structuremodel/app/features/home/pages/details_page.dart';
+import 'package:structuremodel/app/features/home/pages/home_page.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

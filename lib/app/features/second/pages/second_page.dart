@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:structuremodel/app/features/second/ui/widgets/text_widget.dart';
+import '../components/text_component.dart';
 
 class SecondPage extends StatefulWidget {
   final String title;
@@ -23,7 +23,7 @@ class _SecondPageState extends State<SecondPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: TextWidget(
+      body: TextComponent(
         counter: _counter,
       ),
       floatingActionButton: FloatingActionButton(

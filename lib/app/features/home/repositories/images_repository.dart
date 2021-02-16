@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:structuremodel/app/features/home/models/image_model.dart';
+import '../../../shared/models/image_model.dart';
 import '../api/image_api.dart';
 
 class ImagesRepository {

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:structuremodel/app/features/home/models/image_model.dart';
+import '../../../shared/models/image_model.dart';
 
 class ImageApi {
   final Dio client;

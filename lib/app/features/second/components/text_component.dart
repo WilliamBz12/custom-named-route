@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class TextWidget extends StatelessWidget {
+class TextComponent extends StatelessWidget {
   final int counter;
-  TextWidget({this.counter});
+  TextComponent({this.counter});
 
   @override
   Widget build(BuildContext context) {

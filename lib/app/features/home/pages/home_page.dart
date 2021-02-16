@@ -2,10 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:structuremodel/app/features/home/repositories/images_repository.dart';
-import '../../cubits/images/images_cubit.dart';
+import 'package:structuremodel/app/features/home/widgets/custom_button_widget.dart';
+import '../cubits/images/images_cubit.dart';
+import '../repositories/images_repository.dart';
 
-import '../widgets/list_widget.dart';
+import '../components/list_component.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,19 +27,19 @@ class _HomePageState extends State<HomePage> {
     return MultiProvider(
       providers: [
         RepositoryProvider<ImagesRepository>(
-          create: (context) => ImagesRepository(
-            client: Provider.of<Dio>(context, listen: false),
-          ),
+          create: (context) => ImagesRepository(client: context.read<Dio>()),
         ),
         BlocProvider<ImagesCubit>(
-          create: (context) => ImagesCubit(
-            Provider.of(context, listen: false),
-          ),
+          create: (context) => ImagesCubit(context.read<ImagesRepository>()),
         ),
       ],
-      builder: (context, child) {
-        final imagesCubit = Provider.of<ImagesCubit>(context, listen: true);
+      builder: (_, __) => _buildContent(),
+    );
+  }
 
+  Widget _buildContent() {
+    return Builder(
+      builder: (context) {
         return Scaffold(
           appBar: AppBar(
             title: Text("Home"),
@@ -49,30 +50,28 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Expanded(
                   child: BlocBuilder<ImagesCubit, ImagesState>(
-                    cubit: imagesCubit,
+                    cubit: context.watch<ImagesCubit>(),
                     builder: (_, state) {
                       return state.maybeWhen(
                         loadLoading: () => Center(
                           child: CircularProgressIndicator(),
                         ),
                         loadFailure: (message) => Text(message),
-                        loadSuccess: (data) => ListWidget(data: data),
+                        loadSuccess: (data) => ListImageComponent(data: data),
                         orElse: () => Container(),
                       );
                     },
                   ),
                 ),
-                RaisedButton(
-                  child: Text("Load data"),
-                  onPressed: () {
-                    imagesCubit.load();
-                  },
+                CustomButtonWidget(
+                  onTap: context.read<ImagesCubit>().load,
+                  title: "Load Data",
                 ),
-                RaisedButton(
-                  child: Text("Go to second"),
-                  onPressed: () {
+                CustomButtonWidget(
+                  onTap: () {
                     Navigator.pushNamed(context, "/second", arguments: "Title");
                   },
+                  title: "Go to second",
                 ),
               ],
             ),
@@ -80,9 +79,7 @@ class _HomePageState extends State<HomePage> {
           floatingActionButton: FloatingActionButton(
             onPressed: _onTap,
             tooltip: 'Increment',
-            child: Icon(
-              Icons.details,
-            ),
+            child: Icon(Icons.details),
           ),
         );
       },

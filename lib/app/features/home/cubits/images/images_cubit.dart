@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:structuremodel/app/features/home/models/image_model.dart';
 import 'package:structuremodel/app/features/home/repositories/images_repository.dart';
+import '../../../../shared/models/image_model.dart';
 
 part 'images_state.dart';
 part 'images_cubit.freezed.dart';

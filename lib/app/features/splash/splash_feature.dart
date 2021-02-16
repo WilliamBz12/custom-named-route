@@ -1,5 +1,6 @@
 import 'package:custom_app_router/custom_app_router.dart';
-import 'package:structuremodel/app/features/splash/ui/pages/splash_page.dart';
+
+import 'pages/splash_page.dart';
 
 class SplashFeature extends CustomFeature {
   @override

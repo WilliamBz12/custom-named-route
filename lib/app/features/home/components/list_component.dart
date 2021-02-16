@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:structuremodel/app/features/home/models/image_model.dart';
+import '../../../shared/models/image_model.dart';
 
-class ListWidget extends StatelessWidget {
+class ListImageComponent extends StatelessWidget {
   final List<ImageModel> data;
-  ListWidget({this.data});
+  ListImageComponent({this.data});
 
   @override
   Widget build(BuildContext context) {

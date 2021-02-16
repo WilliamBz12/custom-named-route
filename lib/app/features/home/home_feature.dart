@@ -1,6 +1,7 @@
 import 'package:custom_app_router/custom_app_router.dart';
-import 'package:structuremodel/app/features/home/ui/pages/home_page.dart';
-import 'package:structuremodel/app/features/home/ui/pages/details_page.dart';
+
+import 'pages/details_page.dart';
+import 'pages/home_page.dart';
 
 class HomeFeature extends CustomFeature {
   @override
