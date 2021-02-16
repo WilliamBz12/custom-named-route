@@ -23,7 +23,7 @@ class _$ImagesStateTearOff {
   }
 
 // ignore: unused_element
-  ImagesSuccess loadSuccess(List<String> images) {
+  ImagesSuccess loadSuccess(List<ImageModel> images) {
     return ImagesSuccess(
       images,
     );
@@ -45,14 +45,14 @@ mixin _$ImagesState {
   Result when<Result extends Object>({
     @required Result loadInitial(),
     @required Result loadLoading(),
-    @required Result loadSuccess(List<String> images),
+    @required Result loadSuccess(List<ImageModel> images),
     @required Result loadFailure(String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result loadInitial(),
     Result loadLoading(),
-    Result loadSuccess(List<String> images),
+    Result loadSuccess(List<ImageModel> images),
     Result loadFailure(String message),
     @required Result orElse(),
   });
@@ -103,12 +103,18 @@ class _$ImagesInitialCopyWithImpl<$Res> extends _$ImagesStateCopyWithImpl<$Res>
   ImagesInitial get _value => super._value as ImagesInitial;
 }
 
-class _$ImagesInitial implements ImagesInitial {
+class _$ImagesInitial with DiagnosticableTreeMixin implements ImagesInitial {
   const _$ImagesInitial();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ImagesState.loadInitial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ImagesState.loadInitial'));
   }
 
   @override
@@ -124,7 +130,7 @@ class _$ImagesInitial implements ImagesInitial {
   Result when<Result extends Object>({
     @required Result loadInitial(),
     @required Result loadLoading(),
-    @required Result loadSuccess(List<String> images),
+    @required Result loadSuccess(List<ImageModel> images),
     @required Result loadFailure(String message),
   }) {
     assert(loadInitial != null);
@@ -139,7 +145,7 @@ class _$ImagesInitial implements ImagesInitial {
   Result maybeWhen<Result extends Object>({
     Result loadInitial(),
     Result loadLoading(),
-    Result loadSuccess(List<String> images),
+    Result loadSuccess(List<ImageModel> images),
     Result loadFailure(String message),
     @required Result orElse(),
   }) {
@@ -202,12 +208,18 @@ class _$ImagesLoadingCopyWithImpl<$Res> extends _$ImagesStateCopyWithImpl<$Res>
   ImagesLoading get _value => super._value as ImagesLoading;
 }
 
-class _$ImagesLoading implements ImagesLoading {
+class _$ImagesLoading with DiagnosticableTreeMixin implements ImagesLoading {
   const _$ImagesLoading();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ImagesState.loadLoading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ImagesState.loadLoading'));
   }
 
   @override
@@ -223,7 +235,7 @@ class _$ImagesLoading implements ImagesLoading {
   Result when<Result extends Object>({
     @required Result loadInitial(),
     @required Result loadLoading(),
-    @required Result loadSuccess(List<String> images),
+    @required Result loadSuccess(List<ImageModel> images),
     @required Result loadFailure(String message),
   }) {
     assert(loadInitial != null);
@@ -238,7 +250,7 @@ class _$ImagesLoading implements ImagesLoading {
   Result maybeWhen<Result extends Object>({
     Result loadInitial(),
     Result loadLoading(),
-    Result loadSuccess(List<String> images),
+    Result loadSuccess(List<ImageModel> images),
     Result loadFailure(String message),
     @required Result orElse(),
   }) {
@@ -289,7 +301,7 @@ abstract class $ImagesSuccessCopyWith<$Res> {
   factory $ImagesSuccessCopyWith(
           ImagesSuccess value, $Res Function(ImagesSuccess) then) =
       _$ImagesSuccessCopyWithImpl<$Res>;
-  $Res call({List<String> images});
+  $Res call({List<ImageModel> images});
 }
 
 class _$ImagesSuccessCopyWithImpl<$Res> extends _$ImagesStateCopyWithImpl<$Res>
@@ -306,20 +318,28 @@ class _$ImagesSuccessCopyWithImpl<$Res> extends _$ImagesStateCopyWithImpl<$Res>
     Object images = freezed,
   }) {
     return _then(ImagesSuccess(
-      images == freezed ? _value.images : images as List<String>,
+      images == freezed ? _value.images : images as List<ImageModel>,
     ));
   }
 }
 
-class _$ImagesSuccess implements ImagesSuccess {
+class _$ImagesSuccess with DiagnosticableTreeMixin implements ImagesSuccess {
   const _$ImagesSuccess(this.images) : assert(images != null);
 
   @override
-  final List<String> images;
+  final List<ImageModel> images;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ImagesState.loadSuccess(images: $images)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ImagesState.loadSuccess'))
+      ..add(DiagnosticsProperty('images', images));
   }
 
   @override
@@ -343,7 +363,7 @@ class _$ImagesSuccess implements ImagesSuccess {
   Result when<Result extends Object>({
     @required Result loadInitial(),
     @required Result loadLoading(),
-    @required Result loadSuccess(List<String> images),
+    @required Result loadSuccess(List<ImageModel> images),
     @required Result loadFailure(String message),
   }) {
     assert(loadInitial != null);
@@ -358,7 +378,7 @@ class _$ImagesSuccess implements ImagesSuccess {
   Result maybeWhen<Result extends Object>({
     Result loadInitial(),
     Result loadLoading(),
-    Result loadSuccess(List<String> images),
+    Result loadSuccess(List<ImageModel> images),
     Result loadFailure(String message),
     @required Result orElse(),
   }) {
@@ -402,9 +422,9 @@ class _$ImagesSuccess implements ImagesSuccess {
 }
 
 abstract class ImagesSuccess implements ImagesState {
-  const factory ImagesSuccess(List<String> images) = _$ImagesSuccess;
+  const factory ImagesSuccess(List<ImageModel> images) = _$ImagesSuccess;
 
-  List<String> get images;
+  List<ImageModel> get images;
   $ImagesSuccessCopyWith<ImagesSuccess> get copyWith;
 }
 
@@ -434,15 +454,23 @@ class _$ImageFailureCopyWithImpl<$Res> extends _$ImagesStateCopyWithImpl<$Res>
   }
 }
 
-class _$ImageFailure implements ImageFailure {
+class _$ImageFailure with DiagnosticableTreeMixin implements ImageFailure {
   const _$ImageFailure(this.message) : assert(message != null);
 
   @override
   final String message;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ImagesState.loadFailure(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ImagesState.loadFailure'))
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -466,7 +494,7 @@ class _$ImageFailure implements ImageFailure {
   Result when<Result extends Object>({
     @required Result loadInitial(),
     @required Result loadLoading(),
-    @required Result loadSuccess(List<String> images),
+    @required Result loadSuccess(List<ImageModel> images),
     @required Result loadFailure(String message),
   }) {
     assert(loadInitial != null);
@@ -481,7 +509,7 @@ class _$ImageFailure implements ImageFailure {
   Result maybeWhen<Result extends Object>({
     Result loadInitial(),
     Result loadLoading(),
-    Result loadSuccess(List<String> images),
+    Result loadSuccess(List<ImageModel> images),
     Result loadFailure(String message),
     @required Result orElse(),
   }) {

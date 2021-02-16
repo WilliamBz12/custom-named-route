@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +25,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ImagesRepository>(
-          create: (context) => ImagesRepository(),
+        RepositoryProvider<ImagesRepository>(
+          create: (context) => ImagesRepository(
+            client: Provider.of<Dio>(context, listen: false),
+          ),
         ),
         BlocProvider<ImagesCubit>(
           create: (context) => ImagesCubit(
@@ -63,6 +66,12 @@ class _HomePageState extends State<HomePage> {
                   child: Text("Load data"),
                   onPressed: () {
                     imagesCubit.load();
+                  },
+                ),
+                RaisedButton(
+                  child: Text("Go to second"),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/second", arguments: "Title");
                   },
                 ),
               ],

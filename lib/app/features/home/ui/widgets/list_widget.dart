@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:structuremodel/app/features/home/models/image_model.dart';
 
 class ListWidget extends StatelessWidget {
-  final List<String> data;
+  final List<ImageModel> data;
   ListWidget({this.data});
 
   @override
@@ -9,7 +10,7 @@ class ListWidget extends StatelessWidget {
     return Row(
       children: List.generate(
         data.length,
-        (index) => Text(data[index]),
+        (index) => Text(data[index].image),
       ),
     );
   }
