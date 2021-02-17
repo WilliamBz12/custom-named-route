@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   void _onTap() {
     Navigator.pushNamed(
       context,
-      "/home/details",
+      "/home/details/products",
       arguments: 34,
     );
   }

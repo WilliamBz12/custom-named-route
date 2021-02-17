@@ -5,11 +5,14 @@ import 'custom_arguments_model.dart';
 class CustomRouter {
   final String name;
   final Widget Function(BuildContext context, CustomArguments args) child;
-  final CustomFeature featureRouter;
+  final CustomSubFeature subFeature;
 
   CustomRouter({
     @required this.name,
-    @required this.child,
-    this.featureRouter,
-  });
+    this.child,
+    this.subFeature,
+  }) {
+    assert((child == null || subFeature == null) &&
+        (child != null || subFeature != null));
+  }
 }

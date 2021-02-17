@@ -14,7 +14,7 @@ class CustomNavigator {
       var paths = settings.name.split('/');
       paths = _setBarOnPaths(paths);
 
-      var router;
+      CustomRouter router;
 
       if (paths.isNotEmpty) {
         final selectedFeature = appFeatures.features.firstWhere(
@@ -82,6 +82,7 @@ class CustomNavigator {
     int position,
     List<String> paths,
   }) {
+    // remove cause is the initial route
     paths.removeWhere((item) => item == "/");
 
     if (routers != null && position <= paths.length) {
@@ -91,11 +92,18 @@ class CustomNavigator {
       );
 
       if (position + 1 == paths.length) {
+        //handle when have subfeature
+        if (rootRoute?.child == null) {
+          return rootRoute?.subFeature?.routes?.firstWhere(
+            (route) => route.name == initialRoute,
+            orElse: () => null,
+          );
+        }
         return rootRoute;
       }
 
       return _directToSelectedAppRoute(
-        routers: rootRoute?.featureRouter?.routes,
+        routers: rootRoute?.subFeature?.routes,
         paths: paths,
         position: position + 1,
       );

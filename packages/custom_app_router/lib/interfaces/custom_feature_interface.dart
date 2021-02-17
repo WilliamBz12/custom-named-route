@@ -5,3 +5,7 @@ import '../models/custom_route_model.dart';
 abstract class CustomFeature {
   List<CustomRouter> get routes;
 }
+
+abstract class CustomSubFeature {
+  List<CustomRouter> get routes;
+}

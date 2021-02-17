@@ -1,46 +1,9 @@
-import 'package:custom_app_router/custom_app_router.dart';
-import 'package:custom_app_router/models/custom_feature_router_model.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'mocks.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-class MockAppRouter implements CustomAppRouter {
-  @override
-  List<CustomFeatureRouter> get features => [
-        CustomFeatureRouter(
-          name: CustomNavigator.initialRoute,
-          feature: MockHomeFeature(),
-        ),
-        CustomFeatureRouter(
-          name: "/second",
-          feature: MockSecondFeature(),
-        ),
-      ];
-}
-
-class MockHomeFeature implements CustomFeature {
-  @override
-  List<CustomRouter> get routes => [
-        CustomRouter(
-          name: CustomNavigator.initialRoute,
-          child: (_, args) => Container(),
-        ),
-      ];
-}
-
-class MockSecondFeature implements CustomFeature {
-  @override
-  List<CustomRouter> get routes => [
-        CustomRouter(
-          name: CustomNavigator.initialRoute,
-          child: (_, args) => Container(),
-        ),
-        CustomRouter(
-          name: "/details",
-          child: (_, args) => Container(),
-        ),
-      ];
-}
+import 'package:custom_app_router/custom_app_router.dart';
+import 'package:custom_app_router/models/custom_feature_router_model.dart';
 
 main() {
   RouteFactory routes;
@@ -112,6 +75,40 @@ main() {
 
       expect(route?.settings?.name, isNull);
       expect(route?.settings?.arguments, isNull);
+    });
+  });
+
+  group("call routes by subfeatures in features", () {
+    test("should work well when is called a correct route from subfeature", () {
+      final settings = RouteSettings(name: "/second/example");
+
+      final route = routes?.call(settings);
+
+      expect(route.settings.name, equals("/second/example"));
+      expect(route.settings.arguments, isNull);
+    });
+
+    test("should not work when is called an incorrect subfeature route", () {
+      final settings = RouteSettings(
+        name: "/second/example/deta",
+      );
+
+      final route = routes?.call(settings);
+
+      expect(route?.settings?.name, isNull);
+      expect(route?.settings?.arguments, isNull);
+    });
+
+    test("should work when is called an correct route in a subfeature", () {
+      final settings = RouteSettings(
+        name: "/second/example/details",
+        arguments: "23",
+      );
+
+      final route = routes?.call(settings);
+
+      expect(route?.settings?.name, "/second/example/details");
+      expect(route?.settings?.arguments, equals("23"));
     });
   });
 }

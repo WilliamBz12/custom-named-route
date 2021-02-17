@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../components/text_component.dart';
 
 class SecondPage extends StatefulWidget {
   final String title;
@@ -9,12 +8,8 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
-  int _counter = 0;
-
   void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+    Navigator.pushNamed(context, "/second/details/", arguments: "Details");
   }
 
   @override
@@ -23,9 +18,7 @@ class _SecondPageState extends State<SecondPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: TextComponent(
-        counter: _counter,
-      ),
+      body: Text("details"),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
