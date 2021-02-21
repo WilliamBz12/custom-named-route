@@ -1,4 +1,3 @@
-import 'package:custom_app_router/custom_app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,9 +8,7 @@ void main() {
   RouteFactory routes;
 
   setUp(() {
-    routes = CustomNavigator().generateRoutes(
-      appFeatures: MockAppRouter(),
-    );
+    routes = MockAppFeatures().generateRoutes;
   });
 
   group("call routes by features", () {

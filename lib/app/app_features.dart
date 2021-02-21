@@ -20,4 +20,8 @@ class AppFeatures extends CustomAppRouter {
           feature: SecondFeature(),
         ),
       ];
+
+  @override
+  Function get generateRoutes =>
+      CustomNavigator().generateRoutes(appFeatures: AppFeatures());
 }
