@@ -1,11 +1,11 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'mocks.dart';
+import 'package:custom_app_router/custom_app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:custom_app_router/custom_app_router.dart';
-import 'package:custom_app_router/models/custom_feature_router_model.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-main() {
+import '../mocks.dart';
+
+void main() {
   RouteFactory routes;
 
   setUp(() {

@@ -4,7 +4,7 @@ import '../interfaces/app_route_interface.dart';
 import '../interfaces/custom_feature_interface.dart';
 import '../models/custom_arguments_model.dart';
 import '../models/custom_route_model.dart';
-import '../widgets/error_widget.dart';
+import '../widgets/error_route_widget.dart';
 
 class CustomNavigator {
   static const String initialRoute = "/";

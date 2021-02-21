@@ -7,7 +7,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   void _ontap() {
-    Navigator.popAndPushNamed(context, "/home");
+    Navigator.pushNamed(context, "/home");
   }
 
   @override

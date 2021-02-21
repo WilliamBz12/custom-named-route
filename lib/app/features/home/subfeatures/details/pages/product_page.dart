@@ -13,7 +13,16 @@ class _ProductPageState extends State<ProductPage> {
         title: Text("Product"),
       ),
       body: Center(
-        child: Text("top"),
+        child: Column(
+          children: [
+            Text("top"),
+            RaisedButton(
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName("/"));
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
