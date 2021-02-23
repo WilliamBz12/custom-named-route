@@ -3,15 +3,14 @@ import 'package:custom_app_router/models/custom_route_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
-class MockSubFeature implements CustomSubFeature {
+class MockSubFeature implements CustomSubFeatureRouter {
   @override
   List<CustomRouter> get routes => throw UnimplementedError();
 }
 
 void main() {
   String route;
-  CustomSubFeature mockSubFeature;
+  CustomSubFeatureRouter mockSubFeature;
   Widget page;
 
   setUp(() {

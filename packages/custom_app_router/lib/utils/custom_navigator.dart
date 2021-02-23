@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../interfaces/app_route_interface.dart';
-import '../interfaces/custom_feature_interface.dart';
+import '../interfaces/custom_feature_router_interface.dart';
 import '../models/custom_arguments_model.dart';
 import '../models/custom_route_model.dart';
 import '../widgets/error_route_widget.dart';
@@ -44,7 +44,10 @@ class CustomNavigator {
     };
   }
 
-  CustomRouter _directToRouter({CustomFeature feature, List<String> paths}) {
+  CustomRouter _directToRouter({
+    CustomFeatureRouter feature,
+    List<String> paths,
+  }) {
     if (paths.length <= 1) {
       return feature?.routes?.firstWhere(
         (element) => element.name == initialRoute,

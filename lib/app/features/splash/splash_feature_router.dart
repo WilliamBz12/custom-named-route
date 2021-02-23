@@ -2,7 +2,7 @@ import 'package:custom_app_router/custom_app_router.dart';
 
 import 'pages/splash_page.dart';
 
-class SplashFeature extends CustomFeature {
+class SplashFeatureRouter extends CustomFeatureRouter {
   @override
   List<CustomRouter> get routes => [
         CustomRouter(

@@ -1,8 +1,7 @@
-import '../models/custom_feature_router_model.dart';
+import '../models/custom_feature_model.dart';
 
 //features routes
 abstract class CustomAppRouter {
-  List<CustomFeatureRouter> get features;
-
+  List<CustomFeature> get features;
   Function get generateRoutes;
 }
