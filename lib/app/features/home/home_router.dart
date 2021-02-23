@@ -4,7 +4,7 @@ import 'sub_features/details/details_sub_feature_router.dart';
 
 import 'pages/home_page.dart';
 
-class HomeFeatureRouter extends CustomFeatureRouter {
+class HomeRouter extends CustomFeatureRouter {
   @override
   List<CustomRouter> get routes => [
         CustomRouter(

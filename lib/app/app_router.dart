@@ -1,9 +1,9 @@
 import 'package:custom_app_router/custom_app_router.dart';
 import 'package:custom_app_router/models/custom_feature_model.dart';
 
-import 'features/home/home_feature_router.dart';
+import 'features/home/home_router.dart';
 import 'features/second/second_feature_router.dart';
-import 'features/splash/splash_feature_router.dart';
+import 'features/splash/splash_router.dart';
 
 class AppRouter extends CustomAppRouter {
   @override
@@ -14,11 +14,11 @@ class AppRouter extends CustomAppRouter {
   List<CustomFeature> get features => [
         CustomFeature(
           name: CustomNavigator.initialRoute,
-          feature: SplashFeatureRouter(),
+          feature: SplashRouter(),
         ),
         CustomFeature(
           name: "/home",
-          feature: HomeFeatureRouter(),
+          feature: HomeRouter(),
         ),
         CustomFeature(
           name: "/second",
