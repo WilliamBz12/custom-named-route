@@ -32,9 +32,9 @@ void main() {
     () {
       final data = CustomRouter(
         name: route,
-        subFeature: mockSubFeature,
+        subfeature: mockSubFeature,
       );
-      expect(data.subFeature, mockSubFeature);
+      expect(data.subfeature, mockSubFeature);
     },
   );
 }

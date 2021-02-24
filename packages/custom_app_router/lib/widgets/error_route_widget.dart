@@ -12,13 +12,6 @@ class ErrorRouteWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'ROUTE NOT FOUND',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
               '$route',
               style: TextStyle(
                 color: Colors.white,

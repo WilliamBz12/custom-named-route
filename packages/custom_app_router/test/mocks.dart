@@ -3,25 +3,25 @@ import 'package:custom_app_router/models/custom_feature_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MockAppFeatures extends CustomAppRouter {
+class MockAppRouter extends CustomAppRouter {
   @override
   List<CustomFeature> get features => [
         CustomFeature(
           name: CustomNavigator.initialRoute,
-          feature: MockHomeFeature(),
+          router: MockHomeRouter(),
         ),
         CustomFeature(
           name: "/second",
-          feature: MockSecondFeature(),
+          router: MockSecondRouter(),
         ),
       ];
 
   @override
   Function get generateRoutes =>
-      CustomNavigator().generateRoutes(appFeatures: MockAppFeatures());
+      CustomNavigator().generateRoutes(appRouter: MockAppRouter());
 }
 
-class MockHomeFeature extends CustomFeatureRouter {
+class MockHomeRouter extends CustomFeatureRouter {
   @override
   List<CustomRouter> get routes => [
         CustomRouter(
@@ -31,7 +31,7 @@ class MockHomeFeature extends CustomFeatureRouter {
       ];
 }
 
-class MockSecondFeature extends CustomFeatureRouter {
+class MockSecondRouter extends CustomFeatureRouter {
   @override
   List<CustomRouter> get routes => [
         CustomRouter(
@@ -44,12 +44,12 @@ class MockSecondFeature extends CustomFeatureRouter {
         ),
         CustomRouter(
           name: "/example",
-          subFeature: MockExampleSubfeature(),
+          subfeature: MockExampleRouter(),
         ),
       ];
 }
 
-class MockExampleSubfeature extends CustomSubFeatureRouter {
+class MockExampleRouter extends CustomSubFeatureRouter {
   @override
   List<CustomRouter> get routes => [
         CustomRouter(

@@ -14,7 +14,7 @@ void main() {
     () {
       final name = "/test";
       final data = CustomFeature(
-        feature: MockFeature(),
+        router: MockFeature(),
         name: name,
       );
       expect(data.name, name);

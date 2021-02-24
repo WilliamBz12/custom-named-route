@@ -8,21 +8,21 @@ import 'features/splash/splash_router.dart';
 class AppRouter extends CustomAppRouter {
   @override
   Function get generateRoutes =>
-      CustomNavigator().generateRoutes(appFeatures: AppRouter());
+      CustomNavigator().generateRoutes(appRouter: AppRouter());
 
   @override
   List<CustomFeature> get features => [
         CustomFeature(
           name: CustomNavigator.initialRoute,
-          feature: SplashRouter(),
+          router: SplashRouter(),
         ),
         CustomFeature(
           name: "/home",
-          feature: HomeRouter(),
+          router: HomeRouter(),
         ),
         CustomFeature(
           name: "/second",
-          feature: SecondFeatureRouter(),
+          router: SecondFeatureRouter(),
         ),
       ];
 }

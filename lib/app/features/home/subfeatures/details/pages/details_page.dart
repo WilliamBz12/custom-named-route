@@ -15,7 +15,17 @@ class _DetailsPageState extends State<DetailsPage> {
         title: Text("Details"),
       ),
       body: Center(
-        child: Text("${widget.title}"),
+        child: Column(
+          children: [
+            Text("${widget.title}"),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/home/details/products");
+              },
+              child: Text("Go to Products"),
+            ),
+          ],
+        ),
       ),
     );
   }

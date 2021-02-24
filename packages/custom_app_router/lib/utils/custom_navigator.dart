@@ -1,117 +1,87 @@
+import 'package:custom_app_router/widgets/error_route_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../interfaces/app_route_interface.dart';
 import '../interfaces/custom_feature_router_interface.dart';
 import '../models/custom_arguments_model.dart';
 import '../models/custom_route_model.dart';
-import '../widgets/error_route_widget.dart';
+import 'route_path_exception.dart';
+import 'route_path_extension.dart';
 
 class CustomNavigator {
   static const String initialRoute = "/";
 
-  RouteFactory generateRoutes({@required CustomAppRouter appFeatures}) {
+  RouteFactory generateRoutes({@required CustomAppRouter appRouter}) {
     return (RouteSettings settings) {
-      var paths = settings.name.split('/');
-      paths = _setBarOnPaths(paths);
+      final routePath = settings.name;
 
-      CustomRouter router;
-
-      if (paths.isNotEmpty) {
-        final selectedFeature = appFeatures.features.firstWhere(
-          (feature) => feature?.name == paths[0],
+      try {
+        final feature = appRouter.features.firstWhere(
+          (feature) => feature?.name == routePath.featureRoutePath,
           orElse: () => null,
         );
 
-        router = _directToRouter(
-          feature: selectedFeature?.feature,
-          paths: paths,
+        var router = _directToPage(
+          featureRouter: feature?.router,
+          routePath: routePath,
         );
+
+        if (router == null) {
+          return _builderrorRoute("ROUTE NOT FOUND: --- ${settings.name}");
+        }
+
+        debugPrint("INIT ROUTE: --- ${settings.name}");
+
+        return MaterialPageRoute(
+          builder: (BuildContext context) {
+            return router?.child(
+              context,
+              CustomArguments(settings?.arguments),
+            );
+          },
+          settings: settings,
+        );
+      } on RoutePathException catch (e) {
+        return _builderrorRoute(e.message);
       }
-
-      if (router == null) return _errorRoute(settings.name);
-
-      debugPrint("INIT ROUTE: --- ${settings.name} --- ");
-
-      return MaterialPageRoute(
-        builder: (BuildContext context) {
-          return router?.child(
-            context,
-            CustomArguments(settings?.arguments),
-          );
-        },
-        settings: settings,
-      );
     };
   }
 
-  CustomRouter _directToRouter({
-    CustomFeatureRouter feature,
-    List<String> paths,
+  CustomRouter _directToPage({
+    CustomFeatureRouter featureRouter,
+    String routePath,
   }) {
-    if (paths.length <= 1) {
-      return feature?.routes?.firstWhere(
+    if (routePath.pathIsAFeature) {
+      //then we have to return the initial page
+      return featureRouter?.routes?.firstWhere(
         (element) => element.name == initialRoute,
         orElse: () => null,
       );
     }
 
-    return _directToSelectedAppRoute(
-      paths: paths,
-      position: 1,
-      routers: feature.routes,
+    /// if is not a feauture, then is a subfeature or a page
+    final route = featureRouter?.routes?.firstWhere(
+      (element) => element.name == routePath.subfeatureRoutePath,
+      orElse: () => null,
     );
-  }
 
-  List<String> _setBarOnPaths(List<String> paths) {
-    var result = <String>[];
-    for (var path in paths) {
-      result.add("/$path");
-    }
-
-    result.removeAt(0); //remove first 'cause it's empty
-
-    return result;
-  }
-
-  Route<dynamic> _errorRoute(String route) {
-    debugPrint("ROUTE NOT FOUND: --- $route ---");
-    return MaterialPageRoute(
-      builder: (_) => ErrorRouteWidget(route),
-    );
-  }
-
-  CustomRouter _directToSelectedAppRoute({
-    List<CustomRouter> routers,
-    int position,
-    List<String> paths,
-  }) {
-    // remove cause is the initial route
-    paths.removeWhere((item) => item == "/");
-
-    if (routers != null && position <= paths.length) {
-      final rootRoute = routers.firstWhere(
-        (route) => route.name == paths[position],
+    //the route have subfeature or a child
+    if (route?.subfeature != null) {
+      //then we have to return a page from a subfeature
+      return route.subfeature.routes.firstWhere(
+        (element) => element.name == routePath.pageRoutePath,
         orElse: () => null,
       );
-
-      if (position + 1 == paths.length) {
-        //handle when have subfeature
-        if (rootRoute?.child == null) {
-          return rootRoute?.subFeature?.routes?.firstWhere(
-            (route) => route.name == initialRoute,
-            orElse: () => null,
-          );
-        }
-        return rootRoute;
-      }
-
-      return _directToSelectedAppRoute(
-        routers: rootRoute?.subFeature?.routes,
-        paths: paths,
-        position: position + 1,
-      );
     }
 
-    return null;
+    //then return a page from a feature
+    return route;
+  }
+
+  Route<dynamic> _builderrorRoute(String message) {
+    debugPrint("$message");
+    return MaterialPageRoute(
+      builder: (_) => ErrorRouteWidget(message),
+    );
   }
 }

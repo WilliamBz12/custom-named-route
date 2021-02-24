@@ -8,18 +8,10 @@ void main() {
   RouteFactory routes;
 
   setUp(() {
-    routes = MockAppFeatures().generateRoutes;
+    routes = MockAppRouter().generateRoutes;
   });
 
   group("call routes by features", () {
-    test("should not work when is called an empty route", () {
-      final settings = RouteSettings(name: "");
-
-      final route = routes?.call(settings);
-
-      expect(route.settings.name, isNull);
-      expect(route.settings.arguments, isNull);
-    });
     test("should work well when is called the correct route", () {
       final settings = RouteSettings(name: "/", arguments: "23");
 

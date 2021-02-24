@@ -1,6 +1,6 @@
 import 'package:custom_app_router/custom_app_router.dart';
 import 'package:structuremodel/app/features/home/home_provider.dart';
-import 'sub_features/details/details_sub_feature_router.dart';
+import 'subfeatures/details/details_router.dart';
 
 import 'pages/home_page.dart';
 
@@ -15,7 +15,7 @@ class HomeRouter extends CustomFeatureRouter {
         ),
         CustomRouter(
           name: "/details",
-          subFeature: DetailsFeature(),
+          subfeature: DetailsRouter(),
         ),
       ];
 }

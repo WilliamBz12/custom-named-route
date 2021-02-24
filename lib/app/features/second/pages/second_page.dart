@@ -9,7 +9,7 @@ class SecondPage extends StatefulWidget {
 
 class _SecondPageState extends State<SecondPage> {
   void _incrementCounter() {
-    Navigator.pushNamed(context, "/second/details/", arguments: "Details");
+    Navigator.pushNamed(context, "/second/details", arguments: "Details");
   }
 
   @override

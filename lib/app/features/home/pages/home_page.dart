@@ -1,10 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:structuremodel/app/features/home/widgets/custom_button_widget.dart';
 import '../cubits/images/images_cubit.dart';
-import '../repositories/images_repository.dart';
 
 import '../components/list_component.dart';
 
@@ -17,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   void _onTap() {
     Navigator.pushNamed(
       context,
-      "/home/details/products",
+      "/home/detailS/",
       arguments: 34,
     );
   }
