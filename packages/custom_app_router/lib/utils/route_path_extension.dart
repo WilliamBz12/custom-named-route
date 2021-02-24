@@ -1,4 +1,4 @@
-import 'route_path_exception.dart';
+import '../errors/route_path_exception.dart';
 
 extension RoutePathExtension on String {
   /// Examples:

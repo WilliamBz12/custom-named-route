@@ -1,11 +1,11 @@
 import 'package:custom_app_router/widgets/error_route_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../errors/route_path_exception.dart';
 import '../interfaces/app_route_interface.dart';
 import '../interfaces/custom_feature_router_interface.dart';
 import '../models/custom_arguments_model.dart';
 import '../models/custom_route_model.dart';
-import 'route_path_exception.dart';
 import 'route_path_extension.dart';
 
 class CustomNavigator {
